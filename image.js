@@ -1,0 +1,1 @@
+export const imgString = "YOUR BASE64 ENCODED IMAGE (less than 256KB)"

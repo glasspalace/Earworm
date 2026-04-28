@@ -1,0 +1,6 @@
+{
+  "name": "auto-earworm",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "playlist.js"
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "artist": "Chumbawamba",
+    "title": "Tubthumping",
+    "album": "Tubthumper",
+    "scrobbles": "20"
+  },
+  {
+    "artist": "Daft Punk",
+    "title": "Beyond",
+    "album": "Random Access Memories",
+    "scrobbles": "13"
+  },
+  {
+    "artist": "Nine Inch Nails",
+    "title": "Shadow Over Me - The Dare Remix",
+    "album": null,
+    "scrobbles": "13"
+  },
+  {
+    "artist": "Nine Inch Nails",
+    "title": "The First Betrayal",
+    "album": "TRON Ares: Divergence",
+    "scrobbles": "13"
+  },
+  {
+    "artist": "Trent Reznor and Atticus Ross",
+    "title": "Final Set",
+    "album": "Challengers (Original Score)",
+    "scrobbles": "11"
+  },
+  {
+    "artist": "Nine Inch Nails",
+    "title": "As Alive As You Need Me To Be",
+    "album": "TRON: Ares (Original Motion Picture Soundtrack)",
+    "scrobbles": "9"
+  },
+  {
+    "artist": "Nine Inch Nails",
+    "title": "Godmode",
+    "album": "TRON Ares: Divergence",
+    "scrobbles": "9"
+  },
+  {
+    "artist": "The Jackson 5",
+    "title": "Ready Or Not (Here I Come)",
+    "album": "Third Album",
+    "scrobbles": "7"
+  },
+  {
+    "artist": "Trent Reznor and Atticus Ross",
+    "title": "Pieces Form the Whole",
+    "album": "The Social Network",
+    "scrobbles": "7"
+  },
+  {
+    "artist": "Trent Reznor and Atticus Ross",
+    "title": "The Signal",
+    "album": "Challengers (Original Score)",
+    "scrobbles": "7"
+  },
+  {
+    "artist": "Daft Punk",
+    "title": "Motherboard",
+    "album": "Random Access Memories",
+    "scrobbles": "6"
+  },
+  {
+    "artist": "Nine Inch Nails",
+    "title": "Who Wants To Live Forever?",
+    "album": "TRON: Ares (Original Motion Picture Soundtrack)",
+    "scrobbles": "6"
+  },
+  {
+    "artist": "Toby Fox",
+    "title": "Fallen Down",
+    "album": "UNDERTALE Soundtrack",
+    "scrobbles": "6"
+  },
+  {
+    "artist": "Trent Reznor and Atticus Ross",
+    "title": "Carbon Prevails",
+    "album": "The Social Network",
+    "scrobbles": "6"
+  },
+  {
+    "artist": "Lena Raine",
+    "title": "Resurrections",
+    "album": "Celeste (Original Soundtrack)",
+    "scrobbles": "5"
+  },
+  {
+    "user": "soondslash",
+    "length": 15,
+    "minimum": 4,
+    "period": 4
+  }
+]
