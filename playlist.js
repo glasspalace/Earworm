@@ -37,7 +37,7 @@ const searchParams = {
 
 let failed = []
 
-async function getURI(songInfo) {
+export async function getURI(songInfo) {
     const query = "track:" + songInfo.title + " artist:" + songInfo.artist
     const params = {
         q: query,
@@ -49,32 +49,40 @@ async function getURI(songInfo) {
     //console.log(params.q)
     const results = await fetch(endpoint, searchParams)
     const full = await results.json()
-    if (full.tracks.items.length==0) {
+    if (full.tracks.items.length==0) { // if there are no results
         failed.push({
+            title: songInfo.title,
             queryurl: endpoint,
             response: full.tracks
         })
         return null
     } else {
         let found = false
-        for (let i = 0; i < params.limit; i++) {
+        for (let i = 0; i < full.tracks.items.length; i++) { 
             const thisTrack = full.tracks.items[i]
-            if (songInfo.album) {
+            if (songInfo.album) { // match the song title and album name if last.fm provides an album
                 if (thisTrack.name == songInfo.title && thisTrack.album.name == songInfo.album) {
                     found = true
                     return thisTrack.uri
                 }
-            } else if (thisTrack.name == songInfo.title) {
-                found = true
-                return thisTrack.uri
             }
         }
-        if (!found) {
-            failed.push({
-                queryurl: endpoint,
-                response: full.tracks
-            })
-            return null
+        if (!found) { // if album and title matching fails try just title matching
+            for (let i = 0; i < full.tracks.items.length; i++) {
+                const thisResult = full.tracks.items[i]
+                if (thisResult.name == songInfo.title) {
+                    found = true
+                    return thisResult.uri
+                }
+            }
+            if (!found) { // if still nothing log as an error
+                failed.push({
+                    title: songInfo.title,
+                    queryurl: endpoint,
+                    response: full.tracks
+                })
+                return null
+            }
         }
     }   
 }
@@ -83,10 +91,12 @@ let URIs = []
 
 for(let i = 0; i < songList.length - 1; i++) {
     const uri = await getURI(songList[i])
+    const songString = "\"" + songList[i].title + "\" by " + songList[i].artist
     if (uri) {
+        console.log("Added " + songString + " (" + (i+1) + "/" + (songList.length - 1) + ").")
         URIs.push(uri)
     } else {
-        const errorString = "There was an error loading \"" + songList[i].title + "\" by " + songList[i].artist + " at playlist position " + (i+1) + "."
+        const errorString = "There was an error loading " + songString + " at playlist position " + (i+1) + "."
         playlistDetails.description += " " + errorString
         console.log(errorString)
     }
@@ -118,6 +128,7 @@ async function setImage(id) {
         },
         "body": imgString
     }
+    console.log("Setting playlist image...")
     const imgResponse = await fetch(url, imgParams)
     if (imgResponse.statusText == "Accepted") {
         return "Playlist image successfully set."
@@ -127,6 +138,7 @@ async function setImage(id) {
 }
 
 async function updatePlaylist() {
+    console.log("Adding tracks to playlist...")
     const playlistResponse = await fetch(playlistLink, updateParams)
     const fullResponse = await playlistResponse.json()
     if (fullResponse.snapshot_id) {
