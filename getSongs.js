@@ -29,6 +29,7 @@ const trackRequestParams = new URLSearchParams({
 const trackRequestURL = "https://ws.audioscrobbler.com/2.0/?" + trackRequestParams
 
 export async function getSongList() {
+  console.log("Fetching song info...")
   const response = await fetch(trackRequestURL)
   const full = await response.json()
   return full
@@ -61,7 +62,7 @@ async function getAlbum(trackInfo) {
   }
 }
 
-for(let i = 0; i < playlistParams.limit; i++) {
+for (let i = 0; i < playlistParams.limit; i++) {
   let track = songListRaw.weeklytrackchart.track[i]
   let artistInfo = Object.values(track.artist)
   if (track.playcount > (playlistParams.minStreams - 1)) {
