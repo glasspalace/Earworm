@@ -12,8 +12,8 @@ let upper = new Date()
 let lower = new Date()
 upper.setDate(upper.getDate() + 1)
 lower.setDate(lower.getDate() - playlistParams.nDays)
-upper.setHours(12, 0, 0, 0)
-lower.setHours(12, 0, 0, 0)
+upper.setHours(0, 0, 0, 0)
+lower.setHours(0, 0, 0, 0)
 upper = upper.getTime() / 1000
 lower = lower.getTime() / 1000
 
