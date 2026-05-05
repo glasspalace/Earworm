@@ -11,7 +11,7 @@ const apiKey = "your API Key"
 let upper = new Date()
 let lower = new Date()
 upper.setDate(upper.getDate() + 1)
-lower.setDate(lower.getDate() - playlistParams.nDays)
+lower.setDate(lower.getDate() - playlistParams.period)
 upper.setHours(0, 0, 0, 0)
 lower.setHours(0, 0, 0, 0)
 upper = upper.getTime() / 1000
