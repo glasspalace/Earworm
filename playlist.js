@@ -56,6 +56,7 @@ export async function getURI(songInfo) {
     if (full.tracks.items.length==0) { // if there are no results
         failed.push({
             title: songInfo.title,
+            artist: songInfo.artist,
             queryurl: endpoint,
             response: full.tracks
         })
@@ -82,6 +83,7 @@ export async function getURI(songInfo) {
             if (!found) { // if still nothing log as an error
                 failed.push({
                     title: songInfo.title,
+                    artist: songInfo.artist,
                     queryurl: endpoint,
                     response: full.tracks
                 })
