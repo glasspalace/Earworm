@@ -91,12 +91,13 @@ let URIs = []
 
 for(let i = 0; i < songList.length - 1; i++) {
     const uri = await getURI(songList[i])
+    const pos = i + 1
     const songString = "\"" + songList[i].title + "\" by " + songList[i].artist
     if (uri) {
-        console.log("Added " + songString + " (" + (i+1) + "/" + (songList.length - 1) + ").")
+        console.log("Added " + songString + " with " + songList[i].scrobbles + " scrobbles (" + pos + "/" + (songList.length - 1) + ").")
         URIs.push(uri)
     } else {
-        const errorString = "There was an error loading " + songString + " at playlist position " + (i+1) + "."
+        const errorString = "There was an error loading " + songString + " at playlist position " + pos + "."
         playlistDetails.description += " " + errorString
         console.log(errorString)
     }
