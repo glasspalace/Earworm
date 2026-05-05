@@ -14,6 +14,8 @@ let playlistDetails = { // you can change these details as you wish
     "public": true // should be true or false
 }
 
+const listPrivacy = (playlistDetails.public) ? "public" : "private"
+
 const requestHeaders = {
     "Authorization": "Bearer " + spotifyToken,
     "Content-Type": "application/json"
@@ -145,7 +147,7 @@ async function updatePlaylist() {
     const playlistResponse = await fetch(playlistLink, updateParams)
     const fullResponse = await playlistResponse.json()
     if (fullResponse.snapshot_id) {
-        return "Created new playlist named " + playlistDetails.name + " at https://open.spotify.com/playlist/" + playlistID + " with top " + URIs.length + " tracks for user " + playlistParams.username + "."
+        return "Created new " + listPrivacy + " playlist named " + playlistDetails.name + " at https://open.spotify.com/playlist/" + playlistID + " with " + URIs.length + " tracks. See playlist description in Spotify for errors (if any)."
     } else {
         return fullResponse
     }
