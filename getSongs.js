@@ -1,8 +1,8 @@
 import { writeFileSync } from "fs"
 export const playlistParams = {
-  username: "your username",
+  user: "your username",
   limit: 15,
-  nDays: 4,
+  period: 3,
   minStreams: 4 // set this as per your requirements
 }
 
@@ -21,7 +21,7 @@ const trackRequestParams = new URLSearchParams({
   "api_key": apiKey,
   "format": "json",
   "method": "user.getweeklytrackchart",
-  "user": playlistParams.username,
+  "user": playlistParams.user,
   "from": lower,
   "to": upper
 }).toString()
@@ -29,7 +29,7 @@ const trackRequestParams = new URLSearchParams({
 const trackRequestURL = "https://ws.audioscrobbler.com/2.0/?" + trackRequestParams
 
 export async function getSongList() {
-  console.log("Fetching song info...")
+  console.log("Fetching song info for user " + playlistParams.user + "...")
   const response = await fetch(trackRequestURL)
   const full = await response.json()
   return full
@@ -76,11 +76,12 @@ for (let i = 0; i < playlistParams.limit; i++) {
   }
 }
 
+let listInfo = playlistParams
+listInfo.length = songList.length
+listInfo.limitExceeded = (songListRaw.weeklytrackchart.track[playlistParams.limit] && songListRaw.weeklytrackchart.track[playlistParams.limit].playcount > (playlistParams.minStreams - 1)) ? true : false
+
 songList.push({
-  user: playlistParams.username,
-  length: songList.length,
-  minimum: playlistParams.minStreams,
-  period: playlistParams.nDays
+  info: listInfo
 })
 
 writeFileSync("./logs/list.json", JSON.stringify(songList, null, 2))

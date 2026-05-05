@@ -1,4 +1,4 @@
-import { songList, playlistParams } from "./getSongs.js";
+import { songList } from "./getSongs.js";
 import { spotifyToken } from "./getToken.js";
 import { writeFileSync } from "fs"
 import { imgString } from "./image.js"
@@ -6,9 +6,11 @@ import { imgString } from "./image.js"
 const todayDate = new Date()
 const dateStr = todayDate.toLocaleDateString(undefined, {year: "numeric", month: "short", day: "2-digit"})
 
+const nTracks = songList.length - 1
+
 let playlistDetails = { // you can change these details as you wish
     "name": "Earworm",
-    "description": "Generated on " + dateStr + " with " + playlistParams.username + "'s top " + (songList.length - 1) +  " tracks from the last " + playlistParams.nDays + " days on last.fm.",
+    "description": "Generated on " + dateStr + " with " + songList[nTracks].info.user + "'s top " + (nTracks) +  " tracks from the last " + songList[nTracks].info.period + " days on last.fm.",
     "public": true // should be true or false
 }
 
