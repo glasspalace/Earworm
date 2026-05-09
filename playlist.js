@@ -14,7 +14,7 @@ let playlistDetails = { // you can change these details as you wish
     "public": true // should be true or false
 }
 
-const listPrivacy = (playlistDetails.public) ? "public" : "private"
+const listPrivacy = playlistDetails.public ? "public" : "private"
 
 const requestHeaders = {
     "Authorization": "Bearer " + spotifyToken,
