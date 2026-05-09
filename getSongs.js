@@ -40,10 +40,10 @@ writeFileSync("./logs/rawList.json", JSON.stringify(songListRaw.weeklytrackchart
 
 export let songList = []
 
-async function getAlbum(trackInfo) {
+export async function getAlbum(title, artist) {
   const albumReqParams = {
-    track: trackInfo[0],
-    artist: trackInfo[1],
+    track: title,
+    artist: artist,
     api_key: apiKey,
     format: "json",
     method: "track.getInfo"
@@ -69,7 +69,7 @@ for (let i = 0; i < playlistParams.limit; i++) {
     songList.push({
       artist: artistInfo[1],
       title: track.name,
-      album: await getAlbum([track.name, artistInfo[1]]),
+      album: await getAlbum(track.name, artistInfo[1]),
       scrobbles: track.playcount
     })
     //console.log(songList[i])
