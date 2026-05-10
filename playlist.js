@@ -8,7 +8,7 @@ const dateStr = todayDate.toLocaleDateString(undefined, {year: "numeric", month:
 
 const nTracks = songList.length - 1
 
-let playlistDetails = { // you can change these details as you wish
+let playlistDetails = { // you can change these details as you wish. Changing the description is not recommended because it will include errors as well but you can change it if you'd like.
     "name": "Earworm",
     "description": "Generated on " + dateStr + " with " + songList[nTracks].info.user + "'s top " + (nTracks) +  " tracks from the last " + songList[nTracks].info.period + " days on last.fm.",
     "public": true // should be true or false
