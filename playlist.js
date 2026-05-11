@@ -22,14 +22,17 @@ const requestHeaders = {
 }
 
 async function createPlaylist() { // creates playlist and returns the ID
-    const createParams = {
+    console.log("Creating new empty playlist...")
+    const createResponse = await fetch("https://api.spotify.com/v1/me/playlists", {
         method: "POST",
-        headers: requestHeaders,
+        headers: {
+            "Authorization": "Bearer " + spotifyToken,
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify(playlistDetails)
-    }
-    const createURL = "https://api.spotify.com/v1/me/playlists"
-    const createResponse = await fetch(createURL, createParams)
+    })
     const fullReply = await createResponse.json()
+    console.log("Playlist created.")
     return fullReply.id
 }
 
@@ -110,15 +113,13 @@ for(let i = 0; i < songList.length - 1; i++) {
     //console.log(URIs[i], songList[i])
 }
 
-const updateBody = {
-    "uris": URIs,
-    "position": 0
-}
-
 const updateParams = {
     method: "POST",
     headers: requestHeaders,
-    body: JSON.stringify(updateBody),
+    body: JSON.stringify({
+        "uris": URIs,
+        "position": 0
+    }),
     redirect: "follow"
 }
 
@@ -149,7 +150,7 @@ async function updatePlaylist() {
     const playlistResponse = await fetch(playlistLink, updateParams)
     const fullResponse = await playlistResponse.json()
     if (fullResponse.snapshot_id) {
-        return "Created new " + listPrivacy + " playlist named " + playlistDetails.name + " at https://open.spotify.com/playlist/" + playlistID + " with " + URIs.length + " tracks. See playlist description in Spotify for errors (if any)."
+        return URIs.length + " songs added to new " + listPrivacy + " playlist \"" + playlistDetails.name + "\" at https://open.spotify.com/playlist/" + playlistID + ". See playlist description in Spotify for errors (if any)."
     } else {
         return fullResponse
     }
