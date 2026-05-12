@@ -69,7 +69,7 @@ export async function getURI(songInfo) {
         for (let i = 0; i < full.tracks.items.length; i++) { 
             const thisTrack = full.tracks.items[i]
             if (songInfo.album) { // match the song title and album name if last.fm provides an album
-                if (thisTrack.name == songInfo.title && thisTrack.album.name == songInfo.album) {
+                if (thisTrack.name.toLowerCase() == songInfo.title.toLowerCase() && thisTrack.album.name.toLowerCase() == songInfo.album.toLowerCase()) {
                     found = true
                     return thisTrack.uri
                 }
@@ -78,7 +78,7 @@ export async function getURI(songInfo) {
         if (!found) { // if album and title matching fails try just title matching
             for (let i = 0; i < full.tracks.items.length; i++) {
                 const thisResult = full.tracks.items[i]
-                if (thisResult.name == songInfo.title) {
+                if (thisResult.name.toLowerCase() == songInfo.title.toLowerCase()) {
                     found = true
                     return thisResult.uri
                 }
