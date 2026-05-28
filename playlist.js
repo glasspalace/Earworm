@@ -150,7 +150,7 @@ async function updatePlaylist() {
     const playlistResponse = await fetch(playlistLink, updateParams)
     const fullResponse = await playlistResponse.json()
     if (fullResponse.snapshot_id) {
-        return URIs.length + " songs added to new " + listPrivacy + " playlist \"" + playlistDetails.name + "\" at https://open.spotify.com/playlist/" + playlistID + ". See playlist description in Spotify for errors (if any)."
+        return URIs.length + " song(s) added to new " + listPrivacy + " playlist \"" + playlistDetails.name + "\" at https://open.spotify.com/playlist/" + playlistID + ". See playlist description in Spotify for errors (if any)."
     } else {
         return fullResponse
     }
