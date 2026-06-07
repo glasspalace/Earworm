@@ -55,7 +55,7 @@ export async function getAlbum(title, artist) {
   const albumFull = await albumResponse.json()
   //console.log(JSON.stringify(albumFull, null, 2))
 
-  if (albumFull.track.album) {
+  if (albumFull.track && albumFull.track.album) {
     return albumFull.track.album.title
   } else {
     return null
