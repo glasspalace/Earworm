@@ -14,6 +14,7 @@ export const options = {
             clientSecret: " ", //  spotify client secret
             redirectURI: " " // redirect URI (get all of this from developer.spotify.com)
         }
-    }
+    },
+    imgUse: false // whether or not you want to set a custom image for the playlist in image.js (true or false)
     
 }

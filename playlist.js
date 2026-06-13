@@ -157,6 +157,9 @@ async function updatePlaylist() {
     }
 }
 
-console.log(await setImage(playlistID))
+if (options.imgUse) {
+    console.log(await setImage(playlistID))
+}
+
 console.log(await updatePlaylist())
 writeFileSync("./logs/errorLog.json", JSON.stringify(failed, null, 2))
