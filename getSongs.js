@@ -1,12 +1,12 @@
 import { writeFileSync } from "fs"
-export const playlistParams = {
-  user: "your username",
-  limit: 15,
-  period: 3,
-  minStreams: 4 // set this as per your requirements
-}
+import { options } from "./options.js"
 
-const apiKey = "your API Key"
+export const playlistParams = {
+  user: options.playlist.user,
+  limit: options.playlist.limit,
+  period: options.playlist.period,
+  minStreams: options.playlist.minStreams
+}
 
 let upper = new Date()
 let lower = new Date()
@@ -18,7 +18,7 @@ upper = upper.getTime() / 1000
 lower = lower.getTime() / 1000
 
 const trackRequestParams = new URLSearchParams({
-  "api_key": apiKey,
+  "api_key": options.auth.apiKey,
   "format": "json",
   "method": "user.getweeklytrackchart",
   "user": playlistParams.user,
@@ -44,7 +44,7 @@ export async function getAlbum(title, artist) {
   const albumReqParams = {
     track: title,
     artist: artist,
-    api_key: apiKey,
+    api_key: options.auth.apiKey,
     format: "json",
     method: "track.getInfo"
   }

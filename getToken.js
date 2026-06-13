@@ -1,9 +1,11 @@
 import readline from "readline/promises";
 import { stdin as input, stdout as output } from "process";
+import { options } from "./options.js"
 
-const clientID = "yourID"
-const clientSecret = "your secret"
-const redirectURI = "your URI"
+const clientID = options.auth.spotify.clientID
+const clientSecret = options.auth.spotify.clientSecret
+const redirectURI = options.auth.spotify.redirectURI
+
 const scope = "playlist-modify-public playlist-modify-private ugc-image-upload"
 
 const links = {
@@ -37,10 +39,12 @@ export async function getSpotifyToken() {
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
+    const thing = new URL(kekmaURL)
+
     const requestBody = new URLSearchParams({
         "grant_type": "authorization_code",
         "redirect_uri": redirectURI,
-        "code": kekmaURL.substring(25)
+        "code": thing.searchParams.get("code")
     })
 
     const requestParams = {

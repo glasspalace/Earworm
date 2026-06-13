@@ -2,6 +2,7 @@ import { songList } from "./getSongs.js";
 import { spotifyToken } from "./getToken.js";
 import { writeFileSync } from "fs"
 import { imgString } from "./image.js"
+import { options } from "./options.js"
 
 const todayDate = new Date()
 const dateStr = todayDate.toLocaleDateString(undefined, {year: "numeric", month: "short", day: "2-digit"})
@@ -9,9 +10,9 @@ const dateStr = todayDate.toLocaleDateString(undefined, {year: "numeric", month:
 const nTracks = songList.length - 1
 
 let playlistDetails = { // you can change these details as you wish. Changing the description is not recommended because it will include errors as well but you can change it if you'd like.
-    "name": "Earworm",
+    "name": options.playlist.name,
     "description": "Generated on " + dateStr + " with " + songList[nTracks].info.user + "'s top " + (nTracks) +  " track(s) from the last " + songList[nTracks].info.period + " days on last.fm.",
-    "public": true // should be true or false
+    "public": options.playlist.public // should be true or false
 }
 
 const listPrivacy = playlistDetails.public ? "public" : "private"
