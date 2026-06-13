@@ -16,5 +16,4 @@ export const options = {
         }
     },
     imgUse: false // whether or not you want to set a custom image for the playlist in image.js (true or false)
-    
 }
