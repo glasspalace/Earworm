@@ -31,7 +31,7 @@ export async function getSpotifyToken() {
     output: process.stdout
     });
 
-    const kekmaURL = await rl.question("Input the URL you were redirected to after the login: ")
+    const kekmaURL = new URL(await rl.question("Input the URL you were redirected to after the login: "))
     rl.close();
 
     const requestHeaders = {
@@ -39,12 +39,10 @@ export async function getSpotifyToken() {
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
-    const thing = new URL(kekmaURL)
-
     const requestBody = new URLSearchParams({
         "grant_type": "authorization_code",
         "redirect_uri": redirectURI,
-        "code": thing.searchParams.get("code")
+        "code": kekmaURL.searchParams.get("code")
     })
 
     const requestParams = {
