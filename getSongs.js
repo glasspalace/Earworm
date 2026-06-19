@@ -40,7 +40,7 @@ writeFileSync("./logs/rawList.json", JSON.stringify(songListRaw.weeklytrackchart
 
 export let songList = []
 
-export async function getAlbum(title, artist) {
+async function getAlbum(title, artist) {
   const albumReqParams = {
     track: title,
     artist: artist,
