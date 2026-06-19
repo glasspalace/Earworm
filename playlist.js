@@ -11,7 +11,7 @@ const nTracks = songList.length - 1
 
 let playlistDetails = { // you can change these details as you wish. Changing the description is not recommended because it will include errors as well but you can change it if you'd like.
     "name": options.playlist.name,
-    "description": "Generated on " + dateStr + " with " + songList[nTracks].info.user + "'s top " + (nTracks) +  " track(s) from the last " + songList[nTracks].info.period + " days on last.fm.",
+    "description": "Generated on " + dateStr + " with " + songList[nTracks].info.user + "'s top " + (nTracks) +  " track(s) from the last " + songList[nTracks].info.period + " days on last.fm - https://github.com/glasspalace/Earworm.",
     "public": options.playlist.public // should be true or false
 }
 
