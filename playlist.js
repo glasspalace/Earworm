@@ -9,10 +9,10 @@ const dateStr = todayDate.toLocaleDateString(undefined, {year: "numeric", month:
 
 const nTracks = songList.length - 1
 
-let playlistDetails = { // you can change these details as you wish. Changing the description is not recommended because it will include errors as well but you can change it if you'd like.
+let playlistDetails = { // You can change these details as you wish. Changing the description is not recommended because it will include errors as well but you can change it if you'd like.
     "name": options.playlist.name,
     "description": "Generated on " + dateStr + " with " + songList[nTracks].info.user + "'s top " + (nTracks) +  " track(s) from the last " + songList[nTracks].info.period + " days on last.fm - https://github.com/glasspalace/Earworm.",
-    "public": options.playlist.public // should be true or false
+    "public": options.playlist.public
 }
 
 const listPrivacy = playlistDetails.public ? "public" : "private"
@@ -22,7 +22,7 @@ const requestHeaders = {
     "Content-Type": "application/json"
 }
 
-async function createPlaylist() { // creates playlist and returns the ID
+async function createPlaylist() {
     console.log("Creating new empty playlist...")
     const createResponse = await fetch("https://api.spotify.com/v1/me/playlists", {
         method: "POST",
@@ -54,10 +54,9 @@ export async function getURI(songInfo) {
         locale: "en-US"
     }
     const endpoint = "https://api.spotify.com/v1/search?" + (new URLSearchParams(params)).toString()
-    //console.log(params.q)
     const results = await fetch(endpoint, searchParams)
     const full = await results.json()
-    if (full.tracks.items.length==0) { // if there are no results
+    if (full.tracks.items.length==0) {
         failed.push({
             title: songInfo.title,
             artist: songInfo.artist,
@@ -69,14 +68,14 @@ export async function getURI(songInfo) {
         let found = false
         for (let i = 0; i < full.tracks.items.length; i++) { 
             const thisTrack = full.tracks.items[i]
-            if (songInfo.album) { // match the song title and album name if last.fm provides an album
+            if (songInfo.album) {
                 if (thisTrack.name.toLowerCase() == songInfo.title.toLowerCase() && thisTrack.album.name.toLowerCase() == songInfo.album.toLowerCase()) {
                     found = true
                     return thisTrack.uri
                 }
             }
         }
-        if (!found) { // if album and title matching fails try just title matching
+        if (!found) {
             for (let i = 0; i < full.tracks.items.length; i++) {
                 const thisResult = full.tracks.items[i]
                 if (thisResult.name.toLowerCase() == songInfo.title.toLowerCase()) {
@@ -84,7 +83,7 @@ export async function getURI(songInfo) {
                     return thisResult.uri
                 }
             }
-            if (!found) { // if still nothing log as an error
+            if (!found) {
                 failed.push({
                     title: songInfo.title,
                     artist: songInfo.artist,
@@ -111,7 +110,6 @@ for(let i = 0; i < songList.length - 1; i++) {
         playlistDetails.description += " " + errorString
         console.log(errorString)
     }
-    //console.log(URIs[i], songList[i])
 }
 
 const updateParams = {
